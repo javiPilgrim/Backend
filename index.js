@@ -1,6 +1,14 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const Note = require('./models/note')
+
+
+const password = process.argv[2]
+
+const url =
+  `mongodb+srv://javipilgrim:${password}@cluster0.ndstpvu.mongodb.net/noteApp?retryWrites=true&w=majority`
+
 
 const requestLogger = (request, response, next) => {
   console.log('Method:', request.method)
@@ -38,8 +46,10 @@ let notes = [
 ]
 
 
-app.get('/', (req, res) => {
-  res.send('<h1>Hello World!</h1>')
+app.get('/api/notes', (request, response) => {
+  Note.find({}).then(notes => {
+    response.json(notes)
+  })
 })
 
 app.get('/api/notes', (req, res) => {
