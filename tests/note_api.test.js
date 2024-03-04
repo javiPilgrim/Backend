@@ -72,7 +72,9 @@ describe('addition of a new note', () => {
         const newNote = {
             content: 'async/await simplifies making async calls',
             important: true,
+            user: '65e1a2d00bbe9f5da733c323'
         }
+        console.log('La nueva nota: ',newNote)
 
         await api
             .post('/api/notes')
